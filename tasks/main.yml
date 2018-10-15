@@ -1,0 +1,45 @@
+---
+# See https://openbabel.org/docs/dev/Installation/install.html
+# Note: eigen2 is no longer needed!
+
+- name: Install openbabel dependencies
+  become: true
+  become_user: "{{ root_user }}"
+  apt:
+    name:
+      - build-essential
+      - gcc
+      - zlib1g-dev
+      - cmake
+      - libxml2-dev
+      - libeigen3-dev
+      - libcairo2-dev
+      - python-dev
+
+- name: Get openbabel source
+  unarchive:
+    src: "{{ openbabel_url }}"
+    dest: "{{ openbabel_code_folder }}"
+    remote_src: true
+
+- name: Make build directory
+  file:
+    path: "{{ openbabel_topdir }}/build"
+    state: directory
+
+- name: run cmake
+  command: cmake -DEIGEN3_INCLUDE_DIR=/usr/include/eigen3 -DPYTHON_BINDINGS=True ..
+  args:
+    chdir: "{{ openbabel_topdir }}/build"
+    creates: "{{ openbabel_topdir }}/build/Makefile"
+
+- name: make openbabel
+  command: make -j2
+  args:
+    chdir: "{{ openbabel_topdir }}/build"
+    creates: "{{ openbabel_topdir }}/build/bin/obabel"
+
+- name: "Put a line in ~/.profile to add openbabel to the path"
+  lineinfile:
+    path: "${HOME}/.profile"
+    line: "export PATH=${PATH}:{{ openbabel_topdir }}/build/bin"

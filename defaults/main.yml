@@ -1,0 +1,12 @@
+---
+openbabel_version: "2.4.1"
+openbabel_src: openbabel-2-4-1
+openbabel_code_folder: "${HOME}"
+openbabel_url: "https://github.com/openbabel/openbabel/archive/{{openbabel_src}}.zip"
+openbabel_topdir: "{{ openbabel_code_folder }}/openbabel-{{ openbabel_src}}"
+openbabel_executables:
+  - name: openbabel
+    folder: "{{ openbabel_topdir }}/build"
+    plugin: openbabel.openbabel
+
+root_user: root

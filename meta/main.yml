@@ -1,0 +1,19 @@
+---
+allow_duplicates: false
+
+galaxy_info:
+  role_name: openbabel
+  author: "MARVEL NCCR"
+  # yamllint disable-line rule:line-length
+  description: "An Ansible role that installs [OpenBabel](http://openbabel.org/wiki/Main_Page) on Ubuntu."
+  license: MIT
+  min_ansible_version: 2.7
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+  galaxy_tags:
+    - ubuntu
+    - application
+    - science
