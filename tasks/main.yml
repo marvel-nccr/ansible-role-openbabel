@@ -33,6 +33,7 @@
     src: "{{ openbabel_download.dest }}"
     dest: "{{ openbabel_code_folder }}"
     remote_src: true
+  when: openbabel_download.changed
 
 - name: Make build directory
   file:
