@@ -23,11 +23,16 @@
       - python-dev
 
 - name: Get openbabel source
+  get_url:
+    url: "{{ openbabel_url }}"
+    dest: "{{ openbabel_code_folder }}"
+  register: openbabel_download
+
+- name: Extract openbabel source
   unarchive:
-    src: "{{ openbabel_url }}"
+    src: "{{ openbabel_download.dest }}"
     dest: "{{ openbabel_code_folder }}"
     remote_src: true
-    creates: "{{ openbabel_topdir }}"
 
 - name: Make build directory
   file:
