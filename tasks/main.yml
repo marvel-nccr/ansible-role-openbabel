@@ -1,6 +1,12 @@
 ---
 # See https://openbabel.org/docs/dev/Installation/install.html
 # Note: eigen2 is no longer needed!
+- name: install required packages
+  become: true
+  become_user: "{{ root_user }}"
+  apt:
+    name:
+      - bzip2
 
 - name: Install openbabel dependencies
   become: true
