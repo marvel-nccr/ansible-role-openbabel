@@ -6,7 +6,7 @@
   become_user: "{{ root_user }}"
   apt:
     name:
-      - bzip2
+      - unzip
 
 - name: Install openbabel dependencies
   become: true
