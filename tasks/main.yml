@@ -27,6 +27,7 @@
     src: "{{ openbabel_url }}"
     dest: "{{ openbabel_code_folder }}"
     remote_src: true
+    creates: "{{ openbabel_topdir }}"
 
 - name: Make build directory
   file:
